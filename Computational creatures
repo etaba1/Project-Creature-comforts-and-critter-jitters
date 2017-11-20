@@ -22,12 +22,7 @@ var dir = PVector.sub(mouse, this.position);
 
 Creatures.prototype.display = function() {
     //draws/displays the creatures themselves
-  stroke(0);
-  strokeWeight(2);
-  fill(127);
-  image(getImage("avatars/aqualine-ultimate"),this.position.x,this.position.y,30,30);
-  image(getImage("space/girl5"),this.position.x,265,50,50);
-
+  image(getImage("cute/EnemyBug"),this.position.x,this.position.y,40,50);
 };
 Creatures.prototype.checkEdges = function() {
 //making sure the creatures don't go off canvas
@@ -57,11 +52,11 @@ draw = function() {
     //the whole program    
 
     background(179, 252, 250);         
-image(getImage("cute/WaterBlock"),-10,230,500,200);
-    for (var a = -100; a < 4; a+=3) {
-     image(getImage("space/planet"),250+a*44,175,200,0);
+    for (var a = 0; a < 4; a++) {
+        for (var b = 0; b < 7; b++) {
+            image(getImage("cute/GrassBlock"),a*100,-40+b*61,100,125);
+        }
     }
-    image(getImage("cute/WaterBlock"),-10,258,500,200);
     for (var i = 0; i < movers.length; i++) {
         movers[i].update();
         movers[i].display(); 
