@@ -20,11 +20,18 @@ var dir = PVector.sub(mouse, this.position);
     this.position.add(this.velocity);
 };
 
-Creatures.prototype.display = function() {
-    //draws/displays the creatures themselves
-  image(getImage("cute/EnemyBug"),this.position.x,this.position.y,40,50);
+var Redbug = function(position, velocity, acceleration) {
+    Creatures.call(this,position, velocity, acceleration);
 };
-Creatures.prototype.checkEdges = function() {
+
+Redbug.prototype=Object.create(Creatures.prototype);
+
+Redbug.prototype.display = function() {
+    //draws/displays the creatures themselves
+  image(getImage("cute/EnemyBug"),this.position.x,this.position.y,75,80);
+};
+
+Redbug.prototype.checkEdges = function() {
 //making sure the creatures don't go off canvas
  if (this.position.x > width) {
     this.position.x = 0; 
@@ -41,11 +48,9 @@ Creatures.prototype.checkEdges = function() {
   }
 };
 
-var movers = [];
-
-for (var i = 0; i < 5; i++) {
-    //make 5 creatures
-    movers[i] = new Creatures(); 
+for (var i = 0; i < 3; i++) {
+    //make 3 creatures
+    Redbug[i] = new Redbug(); 
 }
 
 draw = function() {
@@ -57,9 +62,9 @@ draw = function() {
             image(getImage("cute/GrassBlock"),a*100,-40+b*61,100,125);
         }
     }
-    for (var i = 0; i < movers.length; i++) {
-        movers[i].update();
-        movers[i].display(); 
+    for (var i = 0; i < Redbug.length; i++) {
+        Redbug[i].update();
+        Redbug[i].display(); 
     }
 
 };
