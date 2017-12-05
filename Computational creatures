@@ -31,7 +31,35 @@ Redbug.prototype.display = function() {
   image(getImage("cute/EnemyBug"),this.position.x,this.position.y,75,80);
 };
 
+var sRedbug = function(position, velocity, acceleration) {
+    Creatures.call(this,position, velocity, acceleration);
+};
+
+sRedbug.prototype=Object.create(Creatures.prototype);
+
+sRedbug.prototype.display = function() {
+    //draws/displays the creatures themselves
+  image(getImage("cute/EnemyBug"),this.position.x,this.position.y,20,30);
+};
+
 Redbug.prototype.checkEdges = function() {
+//making sure the creatures don't go off canvas
+ if (this.position.x > width) {
+    this.position.x = 0; 
+  } 
+  else if (this.position.x < 0) {
+    this.position.x = width;
+  }
+
+  if (this.position.y > height) {
+    this.position.y = 0;
+  } 
+  else if (this.position.y < 0) {
+    this.position.y = height;
+  }
+};
+
+sRedbug.prototype.checkEdges = function() {
 //making sure the creatures don't go off canvas
  if (this.position.x > width) {
     this.position.x = 0; 
@@ -53,6 +81,12 @@ for (var i = 0; i < 3; i++) {
     Redbug[i] = new Redbug(); 
 }
 
+for (var s = 0; s < 3; s++) {
+    //make 3 creatures
+    sRedbug[s] = new sRedbug(); 
+}
+
+
 draw = function() {
     //the whole program    
 
@@ -66,5 +100,10 @@ draw = function() {
         Redbug[i].update();
         Redbug[i].display(); 
     }
+     for (var s = 0; s < sRedbug.length; s++) {
+        sRedbug[s].update();
+        sRedbug[s].display(); 
+    }
+
 
 };
