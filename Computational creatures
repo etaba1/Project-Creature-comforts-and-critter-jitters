@@ -42,6 +42,22 @@ sRedbug.prototype.display = function() {
   image(getImage("cute/EnemyBug"),this.position.x,this.position.y,20,30);
 };
 
+sRedbug.prototype.update = function() {
+    //follow the mouse
+    var mouse = new PVector(random(width), random(height));
+
+var dir = PVector.sub(mouse, this.position);
+    dir.normalize(); // smoother animation
+    //makes creatures swarm around mouse and more lively
+    dir.mult(0.3);
+    this.acceleration = dir;
+    //moves at smooth pace (not too slow)
+    this.velocity.add(this.acceleration);//makes creatures less all over the place and more gathered towards mouse
+    this.velocity.limit(5);
+    this.position.add(this.velocity);
+    
+};
+
 Redbug.prototype.checkEdges = function() {
 //making sure the creatures don't go off canvas
  if (this.position.x > width) {
@@ -99,7 +115,7 @@ draw = function() {
     for (var i = 0; i < Redbug.length; i++) {
         Redbug[i].update();
         Redbug[i].display(); 
-    }
+   }
      for (var s = 0; s < sRedbug.length; s++) {
         sRedbug[s].update();
         sRedbug[s].display(); 
